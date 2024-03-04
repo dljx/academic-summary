@@ -1,0 +1,15 @@
+# Base image with python and streamlit
+FROM python:3.9-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install requirements
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
+# Copy app files
+COPY . .
+
+# Command to start Streamlit app
+CMD ["streamlit", "run", "Home.py", "--server.enableCORS", "false", "--browser.serverAddress", "0.0.0.0", "--browser.gatherUsageStats", "false", "--server.port", "8080"]
